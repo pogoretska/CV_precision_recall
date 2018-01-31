@@ -159,48 +159,56 @@ int main( int argc, char *argv[] ) {
 
 /* --------------------  Build precision table  -------------------- */
 
-std::vector<int> false_pos(10,0);
-std::vector<int> pos(10,0);
+  std::vector<int> tp(10,0); // true positives
+  std::vector<int> fp(10,0); // false positives
 
-for (auto& c : cnds)  
-  if (c.confidence < 0.1) 
-    c.detected ? ++pos[0] : ++ false_pos[0];    
-  else if (c.confidence < 0.2) 
-    c.detected ? ++pos[1] : ++ false_pos[1];
-  else if (c.confidence < 0.3) 
-    c.detected ? ++pos[2] : ++ false_pos[2];
-  else if (c.confidence < 0.4)
-    c.detected ? ++pos[3] : ++ false_pos[3];
-  else if (c.confidence < 0.5) 
-    c.detected ? ++pos[4] : ++ false_pos[4];
-  else if (c.confidence < 0.6) 
-    c.detected ? ++pos[5] : ++ false_pos[5];
-  else if (c.confidence < 0.7) 
-    c.detected ? ++pos[6] : ++ false_pos[6];
-  else if (c.confidence < 0.8) 
-    c.detected ? ++pos[7] : ++ false_pos[7];
-  else if (c.confidence < 0.9)
-    c.detected ? ++pos[8] : ++ false_pos[8];
-  else
-    c.detected ? ++pos[9] : ++ false_pos[9];
+  for (auto& c : cnds)  
+    if (c.confidence < 0.1) 
+      c.detected ? ++tp[0] : ++ fp[0];    
+    else if (c.confidence < 0.2) 
+      c.detected ? ++tp[1] : ++ fp[1];
+    else if (c.confidence < 0.3) 
+      c.detected ? ++tp[2] : ++ fp[2];
+    else if (c.confidence < 0.4)
+      c.detected ? ++tp[3] : ++ fp[3];
+    else if (c.confidence < 0.5) 
+      c.detected ? ++tp[4] : ++ fp[4];
+    else if (c.confidence < 0.6) 
+      c.detected ? ++tp[5] : ++ fp[5];
+    else if (c.confidence < 0.7) 
+      c.detected ? ++tp[6] : ++ fp[6];
+    else if (c.confidence < 0.8) 
+      c.detected ? ++tp[7] : ++ fp[7];
+    else if (c.confidence < 0.9)
+      c.detected ? ++tp[8] : ++ fp[8];
+    else
+      c.detected ? ++tp[9] : ++ fp[9];
 
-auto total_pos = std::accumulate(pos.begin(), pos.end(), 0);
+  auto tp_total = std::accumulate(tp.begin(), tp.end(), 0);
+  auto fp_total = std::accumulate(fp.begin(), fp.end(), 0);
 
-std::cout << std::endl;
-std::cout << std::setw(15) << "diapason" 
+  std::cout << std::endl;
+  std::cout << std::setw(15) << "diapason" 
           << std::setw(10) << "TP" 
           << std::setw(10) << "FP" 
           << std::setw(20) << "Precision" 
           << std::setw(20) << "Recall" << std::endl;
 
-for (auto i = 0; i < 10; i++) { 
-  std::cout << std::setw(6) << "[" << std::setw(3) << (float)i*0.1 << ".." << std::setw(3) << (float)(i+1)*0.1 << ")" 
-            << std::setw(10) << pos[i] 
-            << std::setw(10) << false_pos[i] 
-            << std::setw(20) << (float)pos[i] / (pos[i] + false_pos[i]) 
-            << std::setw(20) << (float)pos[i] / total_pos
+  for (auto i = 0; i < 10; i++) { 
+    std::cout << std::setw(6) << "[" << std::setw(3) << (float)i*0.1 << ".." << std::setw(3) << (float)(i+1)*0.1 << ")" 
+            << std::setw(10) << tp[i] 
+            << std::setw(10) << fp[i] 
+            << std::setw(20) << (float)tp[i] / (tp[i] + fp[i]) 
+            << std::setw(20) << (float)tp[i] / gtos.size()
             << std::endl;    
-}
+  }
+
+  std::cout << std::setw(15) << "Total"
+            << std::setw(10) << tp_total
+            << std::setw(10) << fp_total
+            << std::setw(20) << (float)tp_total / (tp_total + fp_total)
+            << std::setw(20) << (float)tp_total / gtos.size()
+            << std::endl;
   return 0;
 
 }
