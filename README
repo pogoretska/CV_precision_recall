@@ -1,0 +1,25 @@
+CV detector precision and recall table
+
+About
+-------------
+
+Takes as input two csv files with data - one with ground truth objects,
+second with candidates, identified by detector (each line containing object
+class, frame number, position of its bounding box; for candidates also
+confidence).
+
+Checks each candidate if it matches some ground truth object by set of rules
+(same frame, same object class, overlapping area) and filter out
+best-matching pairs.
+
+Counts detector precision and recall values for ranges of confidence from
+[0..0.1) to [0.9..1).
+
+Compiling
+-------------
+
+Compiles with gcc, C++11 and higher.
+g++ -Wall -o %execname% *.cpp
+
+Runs with paths to files with data
+%execname% path/to/gto.csv path/to/cnd.csv
