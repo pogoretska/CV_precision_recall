@@ -5,7 +5,7 @@
 #include <string>
 
 /* enum to store detected object classes */
-constexpr enum class ObjectClass : char { 
+enum class ObjectClass : char { 
   bus, 
   bycicle, 
   person, 
@@ -13,7 +13,7 @@ constexpr enum class ObjectClass : char {
 };
 
 /* simple map string -> enum */
-constexpr static std::map<std::string, ObjectClass> class_map = {
+static std::map<std::string, ObjectClass> class_map = {
   {"bus", ObjectClass::bus}, 
   {"bycicle", ObjectClass::bycicle}, 
   {"person", ObjectClass::person}, 
