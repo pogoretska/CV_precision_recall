@@ -11,7 +11,7 @@ using std::string;
  * structure describing cnd  *
  *                           */
 struct cnd : box {
-  usint frame;
+  unsigned frame;
   ObjectClass cls;
   float confidence;
   bool detected = 0;

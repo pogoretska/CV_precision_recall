@@ -6,12 +6,11 @@ using std::max;
 
 /* method for checking if this object overlaps another, given as argument */
 const bool box::overlaps( const box& abox ) { 
-      usint rbound, lbound, tbound, bbound;
       
-      lbound = max(left, abox.left);                    // left bound of intersection
-      rbound = min(left + width, abox.left + abox.width); // right bound
-      tbound = max(top, abox.top);                      // top bound
-      bbound = min(top + height, abox.top + abox.height); // bottom bound
+      auto lbound = max(left, abox.left);                    // left bound of intersection
+      auto rbound = min(left + width, abox.left + abox.width); // right bound
+      auto tbound = max(top, abox.top);                      // top bound
+      auto bbound = min(top + height, abox.top + abox.height); // bottom bound
       
       return (( lbound < rbound ) && ( tbound < bbound )); 
       // if left bound of intersection is lefter than its right bound 

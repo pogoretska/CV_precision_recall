@@ -12,10 +12,10 @@ using std::string;
  *                           */
 struct gto : box {
   ObjectClass cls;
-  usint frame;
+  unsigned frame;
   bool detected = 0;
 
-/* constructors */  
+/* ctors */  
   gto() = default;
   gto( const string& ); // parse constructor
 
