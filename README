@@ -18,8 +18,10 @@ Counts detector precision and recall values for ranges of confidence from
 Compiling
 -------------
 
-Compiles with gcc, C++11 and higher.
-g++ -Wall -o %execname% *.cpp
+Makefile included.
 
-Runs with paths to files with data
-%execname% path/to/gto.csv path/to/cnd.csv
+Run
+-------------
+
+Input: paths to two .CSV files with gto and cnd data respectively.
+Output: prints number of detected matches and precision and recall table.
